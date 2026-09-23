@@ -201,19 +201,19 @@ table3 <- summary_table |>
 # -----------------------------------------------------------------------------
 write.csv(
   table3,
-  "causal_inference/results/table3/table3_causal.csv",
+  "Causal Inference/results/table3/table3_causal.csv",
   row.names = FALSE
 )
 
 write.csv(
   table3_diagnostics,
-  "causal/results/table3/table3_causal_diagnostics.csv",
+  "Causal Inference/results/table3/table3_causal_diagnostics.csv",
   row.names = FALSE
 )
 
 saveRDS(
   results,
-  "causal/results/table3/table3_raw_simulations.rds"
+  "Causal Inference/results/table3/table3_raw_simulations.rds"
 )
 
 
