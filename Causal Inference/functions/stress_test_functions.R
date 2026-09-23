@@ -36,10 +36,37 @@
 #                    "dplyr", "tidyr", "ggplot2", "patchwork"))
 # =============================================================================
 
+required_packages <- c(
+  "mgcv",
+  "CBPS",
+  "ATE",
+  "WeightIt",
+  "dplyr",
+  "tidyr",
+  "ggplot2",
+  "patchwork"
+)
+
+missing_packages <- required_packages[
+  !vapply(
+    required_packages,
+    requireNamespace,
+    quietly = TRUE,
+    FUN.VALUE = logical(1)
+  )
+]
+
+if (length(missing_packages) > 0) {
+  install.packages(
+    missing_packages,
+    repos = "https://cloud.r-project.org"
+  )
+}
+
 suppressPackageStartupMessages({
   library(mgcv)
   library(CBPS)
-  #library(ATE)
+  library(ATE)
   library(WeightIt)
   library(dplyr)
   library(tidyr)
