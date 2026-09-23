@@ -38,7 +38,7 @@ M <- 1000
 
 
 # Sample size used in Main Table 7
-N_table7 <- 500
+N_table7 <- 2000
 
 
 # Number of cross-fitting folds
