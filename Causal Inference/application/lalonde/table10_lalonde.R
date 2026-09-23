@@ -2,6 +2,18 @@
 # TABLE 10: NSW / PSID / CPS REAL-DATA APPLICATION
 ###############################################################################
 
+rm(list = ls())
+
+
+# -----------------------------------------------------------------------------
+# Source functions
+# -----------------------------------------------------------------------------
+
+source(
+  "Causal Inference/functions/lalonde_functions.R"
+)
+
+
 # Paper benchmark used for evaluation bias
 paper_benchmark <- 1794
 
