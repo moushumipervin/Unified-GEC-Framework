@@ -7127,9 +7127,9 @@ make_table <- function(
             )
         }
       }
-      N_success <- sum(
-        !is.na(success) & success == 1
-      )
+      point_ok <- is.finite(est)
+      
+      N_success <- sum(point_ok)
       
       N_failure <- N_total - N_success
       
