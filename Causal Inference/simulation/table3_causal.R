@@ -210,11 +210,6 @@ write.csv(
   row.names = FALSE
 )
 
-write.csv(
-  table3_diagnostics,
-  "Causal Inference/results/table3/table3_causal_diagnostics.csv",
-  row.names = FALSE
-)
 
 saveRDS(
   results,
