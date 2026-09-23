@@ -196,6 +196,44 @@ table3 <- summary_table |>
     Coverage = Coverage_Analytic,
     M_fail = N_Failure
   )
+table3 <- summary_table |>
+  dplyr::select(
+    Scenario,
+    Method,
+    Bias,
+    MC_SD,
+    RMSE,
+    Coverage = Coverage_Analytic,
+    M_fail = N_Failure
+  ) |>
+  dplyr::mutate(
+    Bias = round(Bias, 3),
+    MC_SD = round(MC_SD, 3),
+    RMSE = round(RMSE, 3),
+    Coverage = round(Coverage, 3),
+    M_fail = as.integer(M_fail)
+  )
+
+table3 <- table3 |>
+  dplyr::mutate(
+    Method = factor(
+      Method,
+      levels = methods
+    ),
+    Scenario = factor(
+      Scenario,
+      levels = c(
+        "OR1PS1",
+        "OR1PS2",
+        "OR2PS1",
+        "OR2PS2"
+      )
+    )
+  ) |>
+  dplyr::arrange(
+    Scenario,
+    Method
+  )
 # -----------------------------------------------------------------------------
 # Save outputs
 # -----------------------------------------------------------------------------
