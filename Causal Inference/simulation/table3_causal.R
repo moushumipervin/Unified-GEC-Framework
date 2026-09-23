@@ -199,6 +199,11 @@ table3 <- summary_table |>
 # -----------------------------------------------------------------------------
 # Save outputs
 # -----------------------------------------------------------------------------
+dir.create(
+  "Causal Inference/results/table3",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 write.csv(
   table3,
   "Causal Inference/results/table3/table3_causal.csv",
