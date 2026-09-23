@@ -36,6 +36,10 @@
 #                    "dplyr", "tidyr", "ggplot2", "patchwork"))
 # =============================================================================
 
+# =============================================================================
+# Required packages
+# =============================================================================
+
 required_packages <- c(
   "mgcv",
   "CBPS",
@@ -49,6 +53,7 @@ required_packages <- c(
   "sandwich"
 )
 
+# Check which packages are not installed
 missing_packages <- required_packages[
   !vapply(
     required_packages,
@@ -58,6 +63,7 @@ missing_packages <- required_packages[
   )
 ]
 
+# Install only missing packages
 if (length(missing_packages) > 0) {
   install.packages(
     missing_packages,
@@ -65,6 +71,7 @@ if (length(missing_packages) > 0) {
   )
 }
 
+# Load packages
 suppressPackageStartupMessages({
   library(mgcv)
   library(CBPS)
@@ -74,8 +81,9 @@ suppressPackageStartupMessages({
   library(tidyr)
   library(ggplot2)
   library(patchwork)
+  library(numDeriv)
+  library(sandwich)
 })
-
 
 # ---------------------------------------------------
 # 1. Data-generating mechanism
