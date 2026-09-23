@@ -1,0 +1,4 @@
+"Method","Bias","MC_SD","RMSE","M_fail"
+"AIPW (estimated PS)",-0.001,0.1573,0.1573,0
+"Standard ET",-0.0065,0.128,0.1281,0
+"ET + PS score",-0.0079,0.1271,0.1272,0
