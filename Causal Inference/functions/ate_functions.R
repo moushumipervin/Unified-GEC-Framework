@@ -36,6 +36,35 @@
 #                    "dplyr", "tidyr", "ggplot2", "patchwork"))
 # =============================================================================
 
+required_packages <- c(
+  "mgcv",
+  "CBPS",
+  "ATE",
+  "WeightIt",
+  "dplyr",
+  "tidyr",
+  "ggplot2",
+  "patchwork",
+  "numDeriv",
+  "sandwich"
+)
+
+missing_packages <- required_packages[
+  !vapply(
+    required_packages,
+    requireNamespace,
+    quietly = TRUE,
+    FUN.VALUE = logical(1)
+  )
+]
+
+if (length(missing_packages) > 0) {
+  install.packages(
+    missing_packages,
+    repos = "https://cloud.r-project.org"
+  )
+}
+
 suppressPackageStartupMessages({
   library(mgcv)
   library(CBPS)
@@ -46,6 +75,7 @@ suppressPackageStartupMessages({
   library(ggplot2)
   library(patchwork)
 })
+
 
 # ---------------------------------------------------
 # 1. Data-generating mechanism
