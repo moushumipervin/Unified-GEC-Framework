@@ -736,7 +736,7 @@ table9 <-
 
 write.csv(
   table9,
-  "Causal Inference/results/table9/table9_highdim_stress.csv",
+  "Causal Inference/results/table9_highdim_stress.csv",
   row.names = FALSE
 )
 
@@ -747,7 +747,7 @@ write.csv(
 
 write.csv(
   A3_table,
-  "Causal Inference/results/table9/table9_highdim_stress_diagnostics.csv",
+  "Causal Inference/results/table9_highdim_stress_diagnostics.csv",
   row.names = FALSE
 )
 
