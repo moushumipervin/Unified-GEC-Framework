@@ -777,3 +777,360 @@ print(
   table9,
   row.names = FALSE
 )
+
+
+###############################################################################
+# 13. SUPPLEMENTARY FIGURES FROM THE HIGH-DIMENSIONAL STRESS TEST
+###############################################################################
+
+dir.create(
+  "Causal Inference/results/figures",
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+
+###############################################################################
+# FIGURE 1
+# Dual-Hessian condition number vs q
+###############################################################################
+
+fig_condition <-
+  ggplot(
+    A3_summary,
+    aes(
+      x = q,
+      y = Median_Log10_Condition,
+      group = method,
+      color = method,
+      shape = method
+    )
+  ) +
+
+  geom_line(
+    linewidth = 1
+  ) +
+
+  geom_point(
+    size = 3
+  ) +
+
+  scale_x_continuous(
+    breaks =
+      A3_q_grid
+  ) +
+
+  labs(
+    x =
+      "Number of balancing functions (q)",
+
+    y =
+      expression(
+        "Median " *
+          log[10] *
+          " condition number of dual Hessian"
+      ),
+
+    color =
+      "Entropy",
+
+    shape =
+      "Entropy"
+  ) +
+
+  theme_bw() +
+
+  theme(
+    legend.position =
+      "right",
+
+    panel.grid.minor =
+      element_blank()
+  )
+
+
+print(
+  fig_condition
+)
+
+
+ggsave(
+  filename =
+    "Causal Inference/results/table9/figures/highdim_condition_number.pdf",
+  plot =
+    fig_condition,
+  width =
+    7,
+  height =
+    5
+)
+
+
+###############################################################################
+# FIGURE 2
+# Solver failure rate vs q
+###############################################################################
+
+fig_failure <-
+  ggplot(
+    A3_summary,
+    aes(
+      x = q,
+      y = Failure_Rate,
+      group = method,
+      color = method,
+      shape = method
+    )
+  ) +
+
+  geom_line(
+    linewidth = 1
+  ) +
+
+  geom_point(
+    size = 3
+  ) +
+
+  scale_x_continuous(
+    breaks =
+      A3_q_grid
+  ) +
+
+  scale_y_continuous(
+    limits =
+      c(
+        0,
+        1
+      )
+  ) +
+
+  labs(
+    x =
+      "Number of balancing functions (q)",
+
+    y =
+      "Solver failure rate",
+
+    color =
+      "Entropy",
+
+    shape =
+      "Entropy"
+  ) +
+
+  theme_bw() +
+
+  theme(
+    legend.position =
+      "right",
+
+    panel.grid.minor =
+      element_blank()
+  )
+
+
+print(
+  fig_failure
+)
+
+
+ggsave(
+  filename =
+    "Causal Inference/results/table9/figures/highdim_failure_rate.pdf",
+  plot =
+    fig_failure,
+  width =
+    7,
+  height =
+    5
+)
+
+
+###############################################################################
+# FIGURE 3
+# RMSE vs q
+###############################################################################
+
+fig_rmse <-
+  ggplot(
+    A3_summary,
+    aes(
+      x = q,
+      y = RMSE,
+      group = method,
+      color = method,
+      shape = method
+    )
+  ) +
+
+  geom_line(
+    linewidth = 1
+  ) +
+
+  geom_point(
+    size = 3
+  ) +
+
+  scale_x_continuous(
+    breaks =
+      A3_q_grid
+  ) +
+
+  labs(
+    x =
+      "Number of balancing functions (q)",
+
+    y =
+      "RMSE",
+
+    color =
+      "Entropy",
+
+    shape =
+      "Entropy"
+  ) +
+
+  theme_bw() +
+
+  theme(
+    legend.position =
+      "right",
+
+    panel.grid.minor =
+      element_blank()
+  )
+
+
+print(
+  fig_rmse
+)
+
+
+ggsave(
+  filename =
+    "Causal Inference/results/table9/figures/highdim_rmse.pdf",
+  plot =
+    fig_rmse,
+  width =
+    7,
+  height =
+    5
+)
+
+
+###############################################################################
+# FIGURE 4
+# Maximum calibration residual vs q
+###############################################################################
+
+A3_balance_plot <-
+  A3_summary %>%
+
+  dplyr::filter(
+    is.finite(
+      P95_Balance_Residual
+    ),
+    P95_Balance_Residual > 0
+  )
+
+
+fig_balance <-
+  ggplot(
+    A3_balance_plot,
+    aes(
+      x = q,
+      y = P95_Balance_Residual,
+      group = method,
+      color = method,
+      shape = method
+    )
+  ) +
+
+  geom_line(
+    linewidth = 1
+  ) +
+
+  geom_point(
+    size = 3
+  ) +
+
+  scale_y_log10() +
+
+  scale_x_continuous(
+    breaks =
+      A3_q_grid
+  ) +
+
+  labs(
+    x =
+      "Number of balancing functions (q)",
+
+    y =
+      "95th percentile of maximum calibration residual",
+
+    color =
+      "Entropy",
+
+    shape =
+      "Entropy"
+  ) +
+
+  theme_bw() +
+
+  theme(
+    legend.position =
+      "right",
+
+    panel.grid.minor =
+      element_blank()
+  )
+
+
+print(
+  fig_balance
+)
+
+
+ggsave(
+  filename =
+    "Causal Inference/results/table9/figures/highdim_balance_residual.pdf",
+  plot =
+    fig_balance,
+  width =
+    7,
+  height =
+    5
+)
+
+
+###############################################################################
+# 14. FAILURE-REASON DIAGNOSTICS
+###############################################################################
+
+A3_failure_reasons <-
+  A3_results %>%
+
+  dplyr::filter(
+    Failure == 1
+  ) %>%
+
+  dplyr::count(
+    q,
+    method,
+    Reason1,
+    Reason0,
+    sort = TRUE
+  )
+
+
+write.csv(
+  A3_failure_reasons,
+  "Causal Inference/results/table9/table9_failure_reasons.csv",
+  row.names = FALSE
+)
+
+
+print(
+  A3_failure_reasons,
+  n = Inf
+)
