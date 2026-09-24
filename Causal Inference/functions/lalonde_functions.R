@@ -1244,8 +1244,8 @@ plot_cdf_panel <- function(x_target, x_donor,
 # Changes made here:
 #   1. four-category multinomial source model is retained;
 #   2. IPW/AIPW variance includes multinomial-phi uncertainty;
-#   3. ET/HD/CE use the same dual/Newton entropy machinery as the simulation;
-#   4. ET/HD/CE variance uses a joint sandwich with multinomial phi;
+#   3. ET/HD/EL use the same dual/Newton entropy machinery as the simulation;
+#   4. ET/HD/EL variance uses a joint sandwich with multinomial phi;
 #   5. theta is NOT used in calibration; it is estimated after lambda.
 ###############################################################################
 
@@ -1847,7 +1847,7 @@ AIPW_multinom_joint_final <- function(
 ###############################################################################
 
 simulation_entropy_transport_maps <- function(
-    entropy = c("ET", "HD", "CE")
+    entropy = c("ET", "HD", "EL")
 ) {
 
   entropy <- match.arg(entropy)
@@ -1863,8 +1863,8 @@ simulation_entropy_transport_maps <- function(
       1 / (4 * eta^2)
     },
 
-    CE = function(eta) {
-      -1 / expm1(eta)
+    EL = function(eta) {
+      -1 / eta
     }
   )
 
@@ -1879,8 +1879,8 @@ simulation_entropy_transport_maps <- function(
       -1 / (2 * eta^3)
     },
 
-    CE = function(eta) {
-      exp(eta) / expm1(eta)^2
+    EL = function(eta) {
+      1 / eta^2
     }
   )
 
@@ -1895,8 +1895,8 @@ simulation_entropy_transport_maps <- function(
       -1 / (4 * eta)
     },
 
-    CE = function(eta) {
-      eta - log(-expm1(eta))
+    EL = function(eta) {
+      -log(-eta)
     }
   )
 
@@ -1911,7 +1911,7 @@ simulation_entropy_transport_maps <- function(
       all(is.finite(eta) & eta < -1e-8)
     },
 
-    CE = function(eta) {
+    EL = function(eta) {
       all(is.finite(eta) & eta < -1e-8)
     }
   )
@@ -1926,7 +1926,7 @@ simulation_entropy_transport_maps <- function(
 
 transport_g_simulation_style <- function(
     r,
-    entropy = c("ET", "HD", "CE")
+    entropy = c("ET", "HD", "EL")
 ) {
   
   entropy <- match.arg(entropy)
@@ -1937,15 +1937,12 @@ transport_g_simulation_style <- function(
     entropy,
     
     # ET: g(r) = log(r)
-    ET = log(r),
+    ET = log(1+r),
     
     # HD: g(r) = -1 / (2 sqrt(r))
-    HD = -1 / (2 * sqrt(r)),
-    
-    # CE: use Omega = 1 + r because CE requires Omega > 1
-    # g(Omega) = log((Omega - 1)/Omega)
-    #          = log(r/(1+r))
-    CE = log(r / (1 + r))
+    HD = -1 / (2 * sqrt(1+r)),
+
+    EL = -1 /(1+ r)
   )
 }
 
@@ -1989,7 +1986,7 @@ solve_lambda_transport_simulation_style <- function(
     S,
     donor_ind,
     target_ind,
-    entropy = c("ET", "HD", "CE"),
+    entropy = c("ET", "HD", "EL"),
     lambda_start = NULL,
     tol = 1e-8,
     maxit = 2000,
@@ -2009,13 +2006,9 @@ solve_lambda_transport_simulation_style <- function(
 
   ef <- simulation_entropy_transport_maps(entropy)
 
-  # CE is written on the combined target+donor missingness representation.
-  rhs_ind <- if (entropy == "CE") {
-    pmin(target_ind + donor_ind, 1)
-  } else {
-    target_ind
-  }
-
+  
+  #rhs_ind <- target_ind
+  rhs_ind <- pmin(target_ind + donor_ind, 1)
   nD <- sum(donor_ind)
   nT <- sum(target_ind)
 
@@ -2023,25 +2016,20 @@ solve_lambda_transport_simulation_style <- function(
 
     lambda_start <- rep(0, q)
 
+    omega_bar <- 1 + nT / nD
+    
     if (entropy == "ET") {
-      lambda_start[1] <- log(nT / nD)
+      lambda_start[1] <- log(omega_bar)
     }
-
+    
     if (entropy == "HD") {
       lambda_start[1] <- -1 / (
-        2 * sqrt(nT / nD)
+        2 * sqrt(omega_bar)
       )
     }
-
-    if (entropy == "CE") {
-      # Raw CE omega should average 1+nT/nD.
-      omega_bar <- 1 + nT / nD
-
-      # omega = -1/expm1(eta)
-      # exp(eta) = 1 - 1/omega
-      lambda_start[1] <- log(
-        1 - 1 / omega_bar
-      )
+    
+    if (entropy == "EL") {
+      lambda_start[1] <- -1 / omega_bar
     }
   }
 
@@ -2098,12 +2086,8 @@ solve_lambda_transport_simulation_style <- function(
     if (is.finite(max_raw) &&
         max_raw < tol) {
 
-      wtransport <- if (entropy == "CE") {
-        donor_ind * pmax(wraw - 1, 0)
-      } else {
-        donor_ind * wraw
-      }
-
+      #wtransport <-donor_ind * wraw
+      wtransport <- donor_ind * (wraw - 1)
       return(list(
         converged = TRUE,
         reason = "converged",
@@ -2214,12 +2198,8 @@ solve_lambda_transport_simulation_style <- function(
       )
   }
 
-  wtransport <- if (entropy == "CE") {
-    donor_ind * pmax(wraw - 1, 0)
-  } else {
-    donor_ind * wraw
-  }
-
+  #wtransport <- donor_ind * wraw
+  wtransport <- donor_ind * (wraw - 1)
   raw_score <- colSums(
     S *
       as.numeric(
@@ -2243,7 +2223,7 @@ solve_lambda_transport_simulation_style <- function(
 
 
 ###############################################################################
-# J. Point estimator for ET/HD/CE
+# J. Point estimator for ET/HD/EL
 #
 # EXACT old GAM cross-fitting.
 # Same simulation entropy solver.
@@ -2254,7 +2234,7 @@ GEC_transport_point_simulation_style <- function(
     d4,
     donor_g,
     ps_obj,
-    entropy = c("ET", "HD", "CE"),
+    entropy = c("ET", "HD", "EL"),
     K = 4,
     seed = 2024202
 ) {
@@ -2381,7 +2361,7 @@ GEC_transport_point_simulation_style <- function(
 
 
 ###############################################################################
-# K. Joint multinomial sandwich for ET/HD/CE
+# K. Joint multinomial sandwich for ET/HD/EL
 #
 # beta = (phi_multinom, lambda, mu1, theta0)
 #
@@ -2482,18 +2462,10 @@ GEC_transport_sandwich_simulation_style <- function(
       eta[ID == 1]
     )
 
-  wtransport <- if (entropy == "CE") {
-    ID * (wraw - 1)
-  } else {
-    ID * wraw
-  }
-
-  rhs_ind <- if (entropy == "CE") {
-    pmin(IT + ID, 1)
-  } else {
-    IT
-  }
-
+  #wtransport <- ID * wraw
+  wtransport <- ID * (wraw - 1)
+ # rhs_ind <- IT
+  rhs_ind <- pmin(IT + ID, 1)
   Psi_phi <- multinom_score_final(
     phi_hat,
     X,
@@ -2538,7 +2510,7 @@ GEC_transport_sandwich_simulation_style <- function(
 
   # Derivative of ONLY the entropy-specific g component wrt multinomial phi.
   # This finite difference does not perturb lambda/eta, so it does not cross
-  # HD/CE dual domains.
+  # HD/EL dual domains.
   Jg <- numDeriv::jacobian(
     func = function(phi) {
 
@@ -2733,7 +2705,7 @@ run_GEC_transport_simulation_style <- function(
     d4,
     donor_g,
     ps_obj,
-    entropy = c("ET", "HD", "CE"),
+    entropy = c("ET", "HD", "EL"),
     K = 4,
     seed = 2024202
 ) {
