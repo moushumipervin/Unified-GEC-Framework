@@ -16,51 +16,6 @@ source(
 
 
 ###############################################################################
-# 2. PACKAGES
-###############################################################################
-
-required_packages <- c(
-  "mgcv",
-  "CBPS",
-  "ATE",
-  "WeightIt",
-  "dplyr",
-  "tidyr",
-  "ggplot2",
-  "patchwork"
-)
-
-missing_packages <- required_packages[
-  !vapply(
-    required_packages,
-    requireNamespace,
-    quietly = TRUE,
-    FUN.VALUE = logical(1)
-  )
-]
-
-if (length(missing_packages) > 0) {
-
-  install.packages(
-    missing_packages,
-    repos = "https://cloud.r-project.org"
-  )
-}
-
-suppressPackageStartupMessages({
-
-  library(mgcv)
-  library(CBPS)
-  library(ATE)
-  library(WeightIt)
-  library(dplyr)
-  library(tidyr)
-  library(ggplot2)
-  library(patchwork)
-})
-
-
-###############################################################################
 # 3. A3 DESIGN
 #
 # Fixed sample size
