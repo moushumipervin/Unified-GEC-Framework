@@ -19,7 +19,7 @@
 #   AIPW-GAM
 #   ET
 #   HD
-#   CE
+#   EL
 #
 ###############################################################################
 
@@ -41,8 +41,7 @@ required_packages <- c(
   "MASS",
   "CVXR",
   "CBPS",
-  "WeightIt",
-  "ATE"
+  "WeightIt"
 )
 
 missing_packages <- required_packages[
@@ -78,7 +77,7 @@ suppressPackageStartupMessages({
 ###############################################################################
 
 source(
-  "Causal Inference/functions/lalonde_functions.R"
+  "lalonde_functions.R"
 )
 
 
@@ -754,7 +753,7 @@ ebcw_cps <-
 
 
 ###############################################################################
-# 20. ET / HD / CE
+# 20. ET / HD / EL
 ###############################################################################
 
 run_three_gec <- function(
@@ -766,7 +765,7 @@ run_three_gec <- function(
       c(
         "ET",
         "HD",
-        "CE"
+        "EL"
       ),
       function(ent) {
         
@@ -810,7 +809,7 @@ run_three_gec <- function(
     c(
       "ET",
       "HD",
-      "CE"
+      "EL"
     )
   
   ans
@@ -993,8 +992,8 @@ rows[[length(rows) + 1L]] <-
 rows[[length(rows) + 1L]] <-
   add_fit(
     "NSW",
-    "CE",
-    gec_nsw[["CE"]]
+    "EL",
+    gec_nsw[["EL"]]
   )
 
 
@@ -1067,8 +1066,8 @@ rows[[length(rows) + 1L]] <-
 rows[[length(rows) + 1L]] <-
   add_fit(
     "PSID",
-    "CE",
-    gec_psid[["CE"]]
+    "EL",
+    gec_psid[["EL"]]
   )
 
 
@@ -1141,8 +1140,8 @@ rows[[length(rows) + 1L]] <-
 rows[[length(rows) + 1L]] <-
   add_fit(
     "CPS",
-    "CE",
-    gec_cps[["CE"]]
+    "EL",
+    gec_cps[["EL"]]
   )
 
 
@@ -1166,7 +1165,7 @@ method_order <- c(
   "AIPW (GAM)",
   "ET",
   "HD",
-  "CE"
+  "EL"
 )
 
 
