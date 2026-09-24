@@ -1,3 +1,51 @@
+###############################################################################
+# REQUIRED PACKAGES
+###############################################################################
+
+required_packages <- c(
+  "MASS",
+  "mgcv",
+  "CVXR",
+  "caret",
+  "dplyr",
+  "tidyr",
+  "purrr",
+  "ggplot2",
+  "ggh4x",
+  "sandwich"
+)
+
+missing_packages <- required_packages[
+  !vapply(
+    required_packages,
+    requireNamespace,
+    quietly = TRUE,
+    FUN.VALUE = logical(1)
+  )
+]
+
+if (length(missing_packages) > 0) {
+  install.packages(
+    missing_packages,
+    repos = "https://cloud.r-project.org"
+  )
+}
+
+suppressPackageStartupMessages({
+  library(MASS)
+  library(mgcv)
+  library(CVXR)
+  library(caret)
+  library(dplyr)
+  library(tidyr)
+  library(purrr)
+  library(ggplot2)
+  library(ggh4x)
+  library(sandwich)
+})
+
+
+
 GenerateData<- function(n,N,p,OR, MAR){
   sigma= 2  # the sd of the error term eta   
   
