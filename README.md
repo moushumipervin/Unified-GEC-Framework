@@ -58,6 +58,8 @@ Missing Covariate/
 ...
 
 
+
+
 ## Manuscript Output Map
 
 | Manuscript output            | R script                                                                          |
@@ -77,6 +79,55 @@ Missing Covariate/
 | Table S8                     | `Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R`     |
 | Table S9                     | `Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R`     |
 | Supplementary overlap figure | `Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R` |
+
+
+
+
+
+
+
+## How to Run the Code
+
+Clone or download the repository and run the R scripts from the repository root.
+
+The scripts use relative file paths, so the repository root should be used as the working directory.
+
+Before running the analyses, install the required R packages used by the corresponding scripts.
+
+Examples:
+
+```r
+source("Semi-supervised/simulation/figure1_semi_supervised.R")
+```
+
+```r
+source("Causal Inference/simulation/table3_causal.R")
+```
+
+```r
+source("Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R")
+```
+
+```r
+source("Causal Inference/application/table5_lalonde.R")
+```
+
+```r
+source("Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R")
+```
+
+For supplementary analyses, run the corresponding script listed in the Manuscript Output Map above.
+
+Some scripts generate more than one manuscript output because the corresponding tables or figures are based on the same simulation or data analysis.
+
+The NHANES application downloads the required NHANES 2017--2018 data directly using the `nhanesA` package.
+
+Random seeds and Monte Carlo settings are specified within the individual analysis scripts to support reproducibility.
+
+
+
+
+
 
 Some scripts reproduce multiple manuscript outputs when those outputs are based on the same simulation or data analysis.
 
