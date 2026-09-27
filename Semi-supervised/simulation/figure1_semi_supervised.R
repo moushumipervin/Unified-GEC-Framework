@@ -1226,7 +1226,7 @@ print(
 
 dir.create(
 
-  "Semi Supervised/results/figure1",
+  "Semi-supervised/results/figure1",
 
   recursive =
     TRUE,
@@ -1243,7 +1243,7 @@ dir.create(
 ggsave(
 
   filename =
-    "Semi Supervised/results/figure1/figure1_boxplots_mcar_or2.pdf",
+    "Semi-supervised/results/figure1/figure1_boxplots_mcar_or2.pdf",
 
   plot =
     figure1,
@@ -1265,7 +1265,7 @@ saveRDS(
   simulation_results_df,
 
   file =
-    "Semi Supervised/results/figure1/figure1_mcar_or2_raw.rds"
+    "Semi-supervised/results/figure1/figure1_mcar_or2_raw.rds"
 )
 
 
@@ -1274,7 +1274,7 @@ write.csv(
   simulation_results_df,
 
   file =
-    "Semi Supervised/results/figure1/figure1_mcar_or2_raw.csv",
+    "Semi-supervised/results/figure1/figure1_mcar_or2_raw.csv",
 
   row.names =
     FALSE
@@ -1301,7 +1301,7 @@ write.csv(
   target_parameter_df,
 
   file =
-    "Semi Supervised/results/figure1/figure1_mcar_or2_target.csv",
+    "Semi-supervised/results/figure1/figure1_mcar_or2_target.csv",
 
   row.names =
     FALSE
@@ -1329,7 +1329,7 @@ cat(
 )
 
 cat(
-  "Semi Supervised/results/figure1/figure1_boxplots_mcar_or2.pdf\n"
+  "Semi-supervised/results/figure1/figure1_boxplots_mcar_or2.pdf\n"
 )
 
 cat(
@@ -1337,11 +1337,11 @@ cat(
 )
 
 cat(
-  "Semi Supervised/results/figure1/figure1_mcar_or2_raw.rds\n"
+  "Semi-supervised/results/figure1/figure1_mcar_or2_raw.rds\n"
 )
 
 cat(
-  "Semi Supervised/results/figure1/figure1_mcar_or2_raw.csv\n"
+  "Semi-supervised/results/figure1/figure1_mcar_or2_raw.csv\n"
 )
 
 cat(
@@ -1349,7 +1349,7 @@ cat(
 )
 
 cat(
-  "Semi Supervised/results/figure1/figure1_mcar_or2_target.csv\n"
+  "Semi-supervised/results/figure1/figure1_mcar_or2_target.csv\n"
 )
 
 cat(
