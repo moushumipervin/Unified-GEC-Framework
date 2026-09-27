@@ -118,8 +118,6 @@ source("Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysi
 
 For supplementary analyses, run the corresponding script listed in the Manuscript Output Map above.
 
-Some scripts generate more than one manuscript output because the corresponding tables or figures are based on the same simulation or data analysis.
-
 The NHANES application downloads the required NHANES 2017--2018 data directly using the `nhanesA` package.
 
 Random seeds and Monte Carlo settings are specified within the individual analysis scripts to support reproducibility.
