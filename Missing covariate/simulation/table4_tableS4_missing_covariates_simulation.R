@@ -58,7 +58,7 @@ suppressPackageStartupMessages({
 ###############################################################################
 
 source(
-  "Missing Covariates/functions/missing_covariate_functions.R"
+  "Missing covariate/functions/missing_covariate_functions.R"
 )
 
 
@@ -1472,7 +1472,7 @@ print(
 ###############################################################################
 
 dir.create(
-  "Missing Covariates/results/table4",
+  "Missing covariate/results/table4",
   recursive = TRUE,
   showWarnings = FALSE
 )
@@ -1484,7 +1484,7 @@ dir.create(
 
 saveRDS(
   raw_results,
-  "Missing Covariates/results/table4/table4_missing_covariates_raw.rds"
+  "Missing covariate/results/table4/table4_missing_covariates_raw.rds"
 )
 
 
@@ -1652,13 +1652,13 @@ tableS4_missing_covariates <-
 
 write.csv(
   table4_missing_covariates,
-  "Missing Covariates/results/table4/table4_missing_covariates.csv",
+  "Missing covariate/results/table4/table4_missing_covariates.csv",
   row.names = FALSE
 )
 
 write.csv(
   tableS4_missing_covariates,
-  "Missing Covariates/results/table4/tableS4_missing_covariates.csv",
+  "Missing covariate/results/table4/tableS4_missing_covariates.csv",
   row.names = FALSE
 )
 ###############################################################################
@@ -1746,7 +1746,7 @@ table4_detailed_diagnostics <-
 
 write.csv(
   table4_detailed_diagnostics,
-  "Missing Covariates/results/table4_missing_covariates_detailed_diagnostics.csv",
+  "Missing covariate/results/table4_missing_covariates_detailed_diagnostics.csv",
   row.names = FALSE
 )
 
