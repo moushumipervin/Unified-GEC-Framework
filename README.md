@@ -1,10 +1,19 @@
 
 # Reproducibility Code
 
-This repository contains the reproducibility code for the simulation studies and real-data analyses reported in the manuscript and supplementary materials.
+This repository contains the R code used to reproduce the simulation studies and data applications reported in the main manuscript and Supplementary Material.
 
-The code is organized by analysis type. Functions used by multiple scripts are stored separately from application scripts, and generated results should be saved in dedicated result folders.
+The repository is organized into three analysis components:
 
+Semi-supervised inference
+Causal inference
+Missing-covariate analysis
+
+Supporting functions are separated from simulation and application scripts.
+
+Some R scripts reproduce more than one manuscript table or figure. This is intentional. When several manuscript outputs are based on the same Monte Carlo experiment or data analysis, they are generated from a single script rather than rerunning the same analysis separately for each table.
+
+Generated tables and figures are not included in the repository because the final numerical results are reported in the manuscript and Supplementary Material. Running the corresponding scripts reproduces those results.
 ## Repository Structure
 
 ```text
