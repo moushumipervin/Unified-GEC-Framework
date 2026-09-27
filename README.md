@@ -58,38 +58,20 @@ Missing Covariate/
     └── table4_tableS4_missing_covariate_simulation.R
 ```
 
-Semi-Supervised Analyses
-Simulation Study
-
-The main semi-supervised simulation figure is reproduced using:
-
-Semi-supervised/simulation/figure1_semi_supervised.R
-
-The supplementary MCAR simulation is reproduced using:
-
-Semi-supervised/simulation/supplementary/tableS3_mcar_or2.R
-
-These scripts use supporting functions from:
-
-Semi-supervised/functions/semi_supervised_functions.R
-NHANES Application
-
-The NHANES application is reproduced using:
-
-Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
-
-Supporting functions are stored in:
-
-Semi-supervised/functions/nhanes_functions.R
-
-A single NHANES script is used because the three reported tables are derived from the same underlying application.
-
-The script reproduces:
-
-Main-text Table 6: compact summary of the repeated label-deletion analysis across 1,000 splits.
-Supplementary Table S8: detailed results from the selected single label-deletion split.
-Supplementary Table S9: coefficient-level repeated-split results, including Monte Carlo variability and analytic standard-error diagnostics.
-
-Thus, Table S8 is the single-split analysis, whereas Tables 6 and S9 summarize the repeated-split analysis.
-
-The NHANES 2017--2018 data are downloaded directly within the R script using the nhanesA package.
+Manuscript Output Map
+Output	R script
+Figure 1	Semi-supervised/simulation/figure1_semi_supervised.R
+Table 3	Causal Inference/simulation/table3_causal.R
+Table 4	Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R
+Table 5	Causal Inference/application/table5_lalonde.R
+Table 6	Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
+Table S1	Causal Inference/simulation/supplementary/tableS1_causal_n2000.R
+Table S2	Causal Inference/simulation/supplementary/tableS2_weight_diagnostics_n1000.R
+Table S3	Semi-supervised/simulation/supplementary/tableS3_mcar_or2.R
+Table S4	Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R
+Table S5	Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R
+Table S6	Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R
+Table S7	Causal Inference/simulation/supplementary/tableS7_overlap_weight_growth.R
+Table S8	Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
+Table S9	Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
+Supplementary overlap figure	Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R
