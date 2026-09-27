@@ -71,7 +71,7 @@ suppressPackageStartupMessages({
 
 simulation_results_df <-
   readRDS(
-    "Semi Supervised/results/figure1/figure1_mcar_or2_raw.rds"
+    "Semi-supervised/results/figure1/figure1_mcar_or2_raw.rds"
   )
 
 
@@ -398,7 +398,7 @@ print(
 
 dir.create(
 
-  "Semi Supervised/results/supplementary/tableS3",
+  "Semi-supervised/results/supplementary/tableS3",
 
   recursive =
     TRUE,
@@ -417,7 +417,7 @@ write.csv(
   tableS3_mcar_or2,
 
   file =
-    "Semi Supervised/results/supplementary/tableS3/tableS3_mcar_or2.csv",
+    "Semi-supervised/results/supplementary/tableS3/tableS3_mcar_or2.csv",
 
   row.names =
     FALSE
@@ -433,7 +433,7 @@ write.csv(
   tableS3_display,
 
   file =
-    "Semi Supervised/results/supplementary/tableS3/tableS3_mcar_or2_display.csv",
+    "Semi-supervised/results/supplementary/tableS3/tableS3_mcar_or2_display.csv",
 
   row.names =
     FALSE
@@ -449,7 +449,7 @@ saveRDS(
   tableS3_summary,
 
   file =
-    "Semi Supervised/results/supplementary/tableS3/tableS3_mcar_or2_summary.rds"
+    "Semi-supervised/results/supplementary/tableS3/tableS3_mcar_or2_summary.rds"
 )
 
 
@@ -474,7 +474,7 @@ cat(
 )
 
 cat(
-  "Semi Supervised/results/supplementary/tableS3/tableS3_mcar_or2.csv\n"
+  "Semi-supervised/results/supplementary/tableS3/tableS3_mcar_or2.csv\n"
 )
 
 cat(
@@ -482,7 +482,7 @@ cat(
 )
 
 cat(
-  "Semi Supervised/results/supplementary/tableS3/tableS3_mcar_or2_display.csv\n"
+  "Semi-supervised/results/supplementary/tableS3/tableS3_mcar_or2_display.csv\n"
 )
 
 cat(
@@ -490,7 +490,7 @@ cat(
 )
 
 cat(
-  "Semi Supervised/results/supplementary/tableS3/tableS3_mcar_or2_summary.rds\n"
+  "Semi-supervised/results/supplementary/tableS3/tableS3_mcar_or2_summary.rds\n"
 )
 
 cat(
