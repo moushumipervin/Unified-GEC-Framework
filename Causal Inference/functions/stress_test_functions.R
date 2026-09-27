@@ -3485,7 +3485,7 @@ newton_backtracking_dual <- function(
   
   list(
     converged = FALSE,
-    reason = "maximum iterations reached",
+    #reason = "maximum iterations reached",
     lambda = lambda,
     weights_all = w,
     weights = w[D == 1],
@@ -3840,21 +3840,7 @@ estimate_ATE_dual <- function(
     )
   }
   
-  # SOFT FAILURE / tolerance warning
-  if (!isTRUE(fit1$converged) ||
-      !isTRUE(fit0$converged)) {
-    
-    warning(
-      paste0(
-        entropy,
-        " calibration warning: ",
-        "raw_score1 = ", fit1$max_raw_score,
-        ", raw_score0 = ", fit0$max_raw_score,
-        ", reason1 = ", fit1$reason,
-        ", reason0 = ", fit0$reason
-      )
-    )
-  }
+ 
   # ============================================================
   # Closed-form ATE estimator
   #
