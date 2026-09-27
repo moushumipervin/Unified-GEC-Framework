@@ -3,7 +3,7 @@
 
 This repository contains the reproducibility code for the simulation studies and real-data analyses reported in the manuscript and supplementary materials.
 
-The code is organized by analysis type. Functions used by multiple scripts are stored separately from application scripts, and generated results are saved in dedicated result folders.
+The code is organized by analysis type. Functions used by multiple scripts are stored separately from application scripts, and generated results should be saved in dedicated result folders.
 
 ## Repository Structure
 
