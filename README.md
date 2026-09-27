@@ -55,7 +55,6 @@ Missing Covariate/
 │
 └── simulation/
     └── table4_tableS4_missing_covariate_simulation.R
-...
 
 ## Manuscript Output Map
 
@@ -78,4 +77,4 @@ Missing Covariate/
 | Supplementary overlap figure | `Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R` |
 
 Some scripts reproduce multiple manuscript outputs when those outputs are based on the same simulation or data analysis.
-
+...
