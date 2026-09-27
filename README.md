@@ -1,4 +1,4 @@
-# Unified-GEC-Framework
+
 # Reproducibility Code
 
 This repository contains the reproducibility code for the simulation studies and real-data analyses reported in the manuscript and supplementary materials.
