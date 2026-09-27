@@ -41,7 +41,8 @@ required_packages <- c(
   "MASS",
   "CVXR",
   "CBPS",
-  "WeightIt"
+  "WeightIt",
+  "ATE"
 )
 
 missing_packages <- required_packages[
@@ -69,6 +70,7 @@ suppressPackageStartupMessages({
   library(DAAG)
   library(haven)
   library(numDeriv)
+  library(ATE)
 })
 
 
