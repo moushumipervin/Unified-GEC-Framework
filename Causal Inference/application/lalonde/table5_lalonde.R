@@ -1,8 +1,8 @@
 ###############################################################################
-# TABLE 10: NSW / PSID / CPS REAL-DATA APPLICATION
+# TABLE 5: NSW / PSID / CPS REAL-DATA APPLICATION
 ###############################################################################
 #
-# This script reproduces Table 10 of the manuscript.
+# This script reproduces Table 5 of the manuscript.
 #
 # Data:
 #   NSW experimental sample
@@ -17,9 +17,9 @@
 #   EBCW
 #   AIPW-LM
 #   AIPW-GAM
+#   EL
 #   ET
 #   HD
-#   EL
 #
 ###############################################################################
 
@@ -1163,11 +1163,10 @@ method_order <- c(
   "EBCW",
   "AIPW (LM)",
   "AIPW (GAM)",
+  "EL",
   "ET",
-  "HD",
-  "EL"
+  "HD"
 )
-
 
 final_long$Method <-
   factor(
@@ -1196,7 +1195,7 @@ final_long <-
 
 
 ###############################################################################
-# 26. BUILD MANUSCRIPT TABLE 10
+# 26. BUILD MANUSCRIPT TABLE 5
 ###############################################################################
 #
 # The manuscript defines evaluation bias relative to the rounded NSW
@@ -1242,7 +1241,7 @@ get_result <- function(
 }
 
 
-table10_rows <-
+table5_rows <-
   lapply(
     method_order,
     function(m) {
@@ -1326,9 +1325,9 @@ table10_rows <-
   )
 
 
-table10 <-
+table5 <-
   dplyr::bind_rows(
-    table10_rows
+    table5_rows
   )
 
 
@@ -1336,8 +1335,8 @@ table10 <-
 # 27. LABEL METHODS EXACTLY AS IN MANUSCRIPT
 ###############################################################################
 
-table10 <-
-  table10 |>
+table5 <-
+  table5 |>
   dplyr::mutate(
     Estimator =
       dplyr::recode(
@@ -1349,19 +1348,19 @@ table10 <-
 
 
 ###############################################################################
-# 28. SAVE TABLE 10
+# 28. SAVE TABLE 5
 ###############################################################################
 
 dir.create(
-  "Causal Inference/results/table10",
+  "Causal Inference/results/table5",
   recursive = TRUE,
   showWarnings = FALSE
 )
 
 
 write.csv(
-  table10,
-  "Causal Inference/results/table10/table10_lalonde.csv",
+  table5,
+  "Causal Inference/results/table5/table5_lalonde.csv",
   row.names = FALSE
 )
 
@@ -1372,13 +1371,13 @@ write.csv(
 
 write.csv(
   final_long,
-  "Causal Inference/results/table10/table10_lalonde_diagnostics.csv",
+  "Causal Inference/results/table5/table5_lalonde_diagnostics.csv",
   row.names = FALSE
 )
 
 
 ###############################################################################
-# 30. PRINT TABLE 10
+# 30. PRINT TABLE 5
 ###############################################################################
 
 cat(
@@ -1386,7 +1385,7 @@ cat(
 )
 
 cat(
-  "TABLE 10: NSW / PSID / CPS REAL-DATA APPLICATION\n"
+  "TABLE 5: NSW / PSID / CPS REAL-DATA APPLICATION\n"
 )
 
 cat(
@@ -1395,6 +1394,6 @@ cat(
 
 
 print(
-  table10,
+  table5,
   row.names = FALSE
 )
