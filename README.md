@@ -57,20 +57,25 @@ Missing Covariate/
     └── table4_tableS4_missing_covariate_simulation.R
 ...
 
-Manuscript Output Map
-Output	R script
-Figure 1	Semi-supervised/simulation/figure1_semi_supervised.R
-Table 3	Causal Inference/simulation/table3_causal.R
-Table 4	Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R
-Table 5	Causal Inference/application/table5_lalonde.R
-Table 6	Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
-Table S1	Causal Inference/simulation/supplementary/tableS1_causal_n2000.R
-Table S2	Causal Inference/simulation/supplementary/tableS2_weight_diagnostics_n1000.R
-Table S3	Semi-supervised/simulation/supplementary/tableS3_mcar_or2.R
-Table S4	Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R
-Table S5	Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R
-Table S6	Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R
-Table S7	Causal Inference/simulation/supplementary/tableS7_overlap_weight_growth.R
-Table S8	Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
-Table S9	Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R
-Supplementary overlap figure	Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R
+## Manuscript Output Map
+
+| Manuscript output            | R script                                                                          |
+| ---------------------------- | --------------------------------------------------------------------------------- |
+| Figure 1                     | `Semi-supervised/simulation/figure1_semi_supervised.R`                            |
+| Table 3                      | `Causal Inference/simulation/table3_causal.R`                                     |
+| Table 4                      | `Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R`      |
+| Table 5                      | `Causal Inference/application/table5_lalonde.R`                                   |
+| Table 6                      | `Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R`     |
+| Table S1                     | `Causal Inference/simulation/supplementary/tableS1_causal_n2000.R`                |
+| Table S2                     | `Causal Inference/simulation/supplementary/tableS2_weight_diagnostics_n1000.R`    |
+| Table S3                     | `Semi-supervised/simulation/supplementary/tableS3_mcar_or2.R`                     |
+| Table S4                     | `Missing Covariate/simulation/table4_tableS4_missing_covariate_simulation.R`      |
+| Table S5                     | `Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R` |
+| Table S6                     | `Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R` |
+| Table S7                     | `Causal Inference/simulation/supplementary/tableS7_overlap_weight_growth.R`       |
+| Table S8                     | `Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R`     |
+| Table S9                     | `Semi-supervised/application/nhanes/table6_tableS8_tableS9_nhanes_analysis.R`     |
+| Supplementary overlap figure | `Causal Inference/simulation/supplementary/tableS5_tableS6_overlap_stress_test.R` |
+
+Some scripts reproduce multiple manuscript outputs when those outputs are based on the same simulation or data analysis.
+
