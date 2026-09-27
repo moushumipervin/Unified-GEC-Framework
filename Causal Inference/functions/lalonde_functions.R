@@ -2304,19 +2304,6 @@ GEC_transport_point_simulation_style <- function(
     )
   }
 
-  if (!isTRUE(fit$converged)) {
-    warning(
-      entropy,
-      " calibration warning: ",
-      fit$reason,
-      "; max raw score=",
-      signif(
-        fit$max_raw_score,
-        5
-      )
-    )
-  }
-
   wt <- fit$transport_weights_all
 
   mu1_hat <- mean(
