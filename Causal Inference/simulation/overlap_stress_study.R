@@ -2,8 +2,8 @@
 # SUPPLEMENTARY SEVERE-OVERLAP STRESS TEST
 #
 # Produces:
-#   Table S4: True propensity-score diagnostics
-#   Table S5: Complete estimator performance
+#   Table S5: True propensity-score diagnostics
+#   Table S6: Complete estimator performance
 #   Supplementary figure: Mean maximum treated-arm weight
 ###############################################################################
 
@@ -469,38 +469,81 @@ A2_summary <-
 
 
 ###############################################################################
-# 9. CREATE OUTPUT DIRECTORIES
+# 9. OUTPUT DIRECTORIES
 ###############################################################################
 
+results_root <-
+  "Causal Inference/results/overlap_stress_test"
+
+tableS5_dir <-
+  file.path(
+    results_root,
+    "tableS5"
+  )
+
+tableS6_dir <-
+  file.path(
+    results_root,
+    "tableS6"
+  )
+
+figure_dir <-
+  file.path(
+    results_root,
+    "figures"
+  )
+
+diagnostics_dir <-
+  file.path(
+    results_root,
+    "diagnostics"
+  )
+
+
 dir.create(
-  "Causal Inference/results/supplementary/overlap_stress",
+  tableS5_dir,
   recursive = TRUE,
   showWarnings = FALSE
 )
 
 dir.create(
-  "Causal Inference/results/supplementary/overlap_stress/figures",
+  tableS6_dir,
   recursive = TRUE,
   showWarnings = FALSE
 )
 
+dir.create(
+  figure_dir,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  diagnostics_dir,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
 ###############################################################################
-# 10. SAVE RAW MONTE CARLO RESULTS
+# SAVE RAW MONTE CARLO RESULTS
 ###############################################################################
 
 saveRDS(
   A2_all_results,
-  "Causal Inference/results/supplementary/overlap_stress/overlap_stress_raw.rds"
+  file.path(
+    diagnostics_dir,
+    "overlap_stress_raw.rds"
+  )
 )
 
 
+
 ###############################################################################
-# 11. SUPPLEMENTARY TABLE S4
+# 11. SUPPLEMENTARY TABLE S5
 # TRUE PROPENSITY-SCORE DIAGNOSTICS
 ###############################################################################
 
-tableS4 <-
+tableS5 <-
   A2_all_results %>%
 
   dplyr::group_by(
@@ -570,19 +613,26 @@ tableS4 <-
   )
 
 
+###############################################################################
+# SAVE SUPPLEMENTARY TABLE S5
+###############################################################################
+
 write.csv(
-  tableS4,
-  "Causal Inference/results/supplementary/overlap_stress/tableS4_propensity_diagnostics.csv",
+  tableS5,
+  file.path(
+    tableS5_dir,
+    "tableS5_propensity_diagnostics.csv"
+  ),
   row.names = FALSE
 )
 
 
 ###############################################################################
-# 12. SUPPLEMENTARY TABLE S5
+# 12. SUPPLEMENTARY TABLE S6
 # COMPLETE ESTIMATOR PERFORMANCE
 ###############################################################################
 
-tableS5 <-
+tableS6 <-
   A2_summary %>%
 
   dplyr::mutate(
@@ -701,9 +751,16 @@ tableS5 <-
   )
 
 
+###############################################################################
+# SAVE SUPPLEMENTARY TABLE S6
+###############################################################################
+
 write.csv(
-  tableS5,
-  "Causal Inference/results/supplementary/overlap_stress/tableS5_complete_performance.csv",
+  tableS6,
+  file.path(
+    tableS6_dir,
+    "tableS6_complete_performance.csv"
+  ),
   row.names = FALSE
 )
 
@@ -811,21 +868,23 @@ print(
 )
 
 
+###############################################################################
+# SAVE SUPPLEMENTARY FIGURE
+###############################################################################
+
 ggsave(
   filename =
-    "Causal Inference/results/supplementary/overlap_stress/figures/figureS_overlap_max_weight.pdf",
+    file.path(
+      figure_dir,
+      "figure_overlap_max_weight.pdf"
+    ),
 
   plot =
     figureS_overlap,
 
-  width =
-    8,
-
-  height =
-    5
+  width = 8,
+  height = 5
 )
-
-
 ###############################################################################
 # 14. PRINT TABLES
 ###############################################################################
@@ -835,7 +894,7 @@ cat(
 )
 
 cat(
-  "SUPPLEMENTARY TABLE S4\n"
+  "SUPPLEMENTARY TABLE S5\n"
 )
 
 cat(
@@ -847,7 +906,7 @@ cat(
 )
 
 print(
-  tableS4,
+  tableS5,
   n = Inf
 )
 
@@ -857,7 +916,7 @@ cat(
 )
 
 cat(
-  "SUPPLEMENTARY TABLE S5\n"
+  "SUPPLEMENTARY TABLE S6\n"
 )
 
 cat(
@@ -869,6 +928,6 @@ cat(
 )
 
 print(
-  tableS5,
+  tableS6,
   n = Inf
 )
