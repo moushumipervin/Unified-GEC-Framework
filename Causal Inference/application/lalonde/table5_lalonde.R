@@ -77,7 +77,7 @@ suppressPackageStartupMessages({
 ###############################################################################
 
 source(
-  "lalonde_functions.R"
+  "Causal Inference/functions/lalonde_functions.R"
 )
 
 
