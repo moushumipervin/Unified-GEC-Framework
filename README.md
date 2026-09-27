@@ -10,31 +10,43 @@ The code is organized by analysis type. Functions used by multiple scripts are s
 ```text
 Semi-supervised/
 ├── functions/
-│   └── nhanes_functions.R
-├── application/
-│   └── nhanes/
-│       └── nhanes_semi_supervised_analysis.R
-└── results/
+│   ├── nhanes_functions.R
+│   └── semi_supervised_functions.R
+│
+├── simulation/
+│   ├── figure1_semi_supervised.R
+│   └── supplementary/
+│       └── tableS3_mcar_or2.R
+│
+└── application/
     └── nhanes/
-        ├── table6/
-        ├── tableS8/
-        ├── tableS9/
-        └── diagnostics/
+        └── table6_tableS8_tableS9_nhanes_analysis.R
+
 
 Causal Inference/
 ├── functions/
-│   └── stress_test_functions.R
-├── application/
-│   └── overlap_stress_test/
-│       ├── severe_overlap_stress_test.R
+│   ├── ate_functions.R
+│   ├── stress_test_functions.R
+│   └── lalonde_functions.R
+│
+├── simulation/
+│   ├── table3_causal.R
+│   └── supplementary/
+│       ├── tableS1_causal_n2000.R
+│       ├── tableS2_weight_diagnostics_n1000.R
+│       ├── tableS5_tableS6_overlap_stress_test.R
 │       └── tableS7_overlap_weight_growth.R
-└── results/
-    └── overlap_stress_test/
-        ├── tableS5/
-        ├── tableS6/
-        ├── tableS7/
-        ├── figures/
-        └── diagnostics/
+│
+└── application/
+    └── table5_lalonde.R
+
+
+Missing Covariate/
+├── functions/
+│   └── missing_covariate_functions.R
+│
+└── simulation/
+    └── table4_tableS4_missing_covariate_simulation.R
 ```
 
 ## Semi-Supervised NHANES Analysis
