@@ -2210,7 +2210,7 @@ solve_lambda_transport_simulation_style <- function(
 
   list(
     converged = FALSE,
-    reason = "maximum iterations reached",
+    #reason = "maximum iterations reached",
     lambda = lambda,
     eta = eta,
     raw_weights_all = wraw,
