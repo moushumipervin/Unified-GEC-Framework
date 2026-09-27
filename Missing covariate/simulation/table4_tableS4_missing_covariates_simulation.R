@@ -1,7 +1,7 @@
 ###############################################################################
-# TABLE 5: MISSING-COVARIATE REGRESSION SIMULATION
+# TABLE 4 + TABLE S4: MISSING-COVARIATE REGRESSION SIMULATION
 #
-# Reproduces Main Table 5:
+# Reproduces Main Table 4 and Supplementary Table S4:
 # Simulation results for the missing-covariate regression setting
 # based on 1,000 Monte Carlo replications.
 #
@@ -12,7 +12,7 @@
 #   Missing Covariates/functions/missing_covariate_functions.R
 #
 # Outputs:
-#   Missing Covariates/results/table5/
+#   Missing Covariates/results/table4/
 ###############################################################################
 
 rm(list = ls())
@@ -1468,11 +1468,11 @@ print(
 
 
 ###############################################################################
-# 12. CREATE TABLE 5 OUTPUT DIRECTORY
+# 12. CREATE TABLE 4 OUTPUT DIRECTORY
 ###############################################################################
 
 dir.create(
-  "Missing Covariates/results/table5",
+  "Missing Covariates/results/table4",
   recursive = TRUE,
   showWarnings = FALSE
 )
@@ -1484,29 +1484,12 @@ dir.create(
 
 saveRDS(
   raw_results,
-  "Missing Covariates/results/table5/table5_missing_covariates_raw.rds"
+  "Missing Covariates/results/table4/table4_missing_covariates_raw.rds"
 )
 
 
 ###############################################################################
-# 14. SAVE COMPLETE MONTE CARLO DIAGNOSTIC SUMMARY
-###############################################################################
-
-write.csv(
-  final_table,
-  "Missing Covariates/results/table5/table5_missing_covariates_diagnostics.csv",
-  row.names = FALSE
-)
-
-
-saveRDS(
-  final_table,
-  "Missing Covariates/results/table5/table5_missing_covariates_diagnostics.rds"
-)
-
-
-###############################################################################
-# 15. CREATE THE EXACT MAIN TABLE 5 DATA
+# 15. CREATE THE EXACT MAIN TABLE 5 AND SUPPLEMENTARY TABLE S4 DATA
 #
 # Paper columns:
 #
@@ -1516,7 +1499,7 @@ saveRDS(
 # beta2: Bias, MC SD, RMSE, Cov.
 ###############################################################################
 
-table5_missing_covariates <-
+table_missing_covariates <-
   final_table %>%
 
   dplyr::select(
@@ -1635,34 +1618,57 @@ table5_missing_covariates <-
 
 
 ###############################################################################
-# 16. PRINT TABLE 5
+# MAIN PAPER TABLE 4
+# OR1PS1 + OR2PS1
 ###############################################################################
 
-print(
-  table5_missing_covariates,
-  n = Inf
-)
+table4_missing_covariates <-
+  table_missing_covariates %>%
+  dplyr::filter(
+    Scenario %in% c(
+      "OR1PS1",
+      "OR2PS1"
+    )
+  )
 
 
 ###############################################################################
-# 17. SAVE TABLE 5
+# SUPPLEMENTARY TABLE S4
+# OR1PS2 + OR2PS2
+###############################################################################
+
+tableS4_missing_covariates <-
+  table_missing_covariates %>%
+  dplyr::filter(
+    Scenario %in% c(
+      "OR1PS2",
+      "OR2PS2"
+    )
+  )
+
+###############################################################################
+# 17. SAVE TABLE 4
 ###############################################################################
 
 write.csv(
-  table5_missing_covariates,
-  "Missing Covariates/results/table5/table5_missing_covariates.csv",
+  table4_missing_covariates,
+  "Missing Covariates/results/table4/table4_missing_covariates.csv",
   row.names = FALSE
 )
 
-
+write.csv(
+  tableS4_missing_covariates,
+  "Missing Covariates/results/table4/tableS4_missing_covariates.csv",
+  row.names = FALSE
+)
 ###############################################################################
 # 18. OPTIONAL: COMPLETE MANUSCRIPT DIAGNOSTIC TABLE
 #
-# This is not Main Table 5.
+# This is not Main Table 4.
 # It keeps additional quantities useful for reproducibility/reviewer checks.
 ###############################################################################
 
-table5_detailed_diagnostics <-
+table4_detailed_diagnostics <-
   final_table %>%
 
   dplyr::select(
@@ -1739,60 +1745,9 @@ table5_detailed_diagnostics <-
 
 
 write.csv(
-  table5_detailed_diagnostics,
-  "Missing Covariates/results/table5_missing_covariates_detailed_diagnostics.csv",
+  table4_detailed_diagnostics,
+  "Missing Covariates/results/table4_missing_covariates_detailed_diagnostics.csv",
   row.names = FALSE
 )
 
 
-###############################################################################
-# 19. FINAL MESSAGE
-###############################################################################
-
-cat(
-  "\n============================================================\n"
-)
-
-cat(
-  "TABLE 5 SIMULATION COMPLETE\n"
-)
-
-cat(
-  "============================================================\n"
-)
-
-cat(
-  "\nMain manuscript table:\n"
-)
-
-cat(
-  "Missing Covariates/results/table5_missing_covariates.csv\n"
-)
-
-cat(
-  "\nRaw Monte Carlo results:\n"
-)
-
-cat(
-  "Missing Covariates/results/table5_missing_covariates_raw.rds\n"
-)
-
-cat(
-  "\nComplete diagnostics:\n"
-)
-
-cat(
-  "Missing Covariates/results/table5_missing_covariates_diagnostics.csv\n"
-)
-
-cat(
-  "\nDetailed diagnostics:\n"
-)
-
-cat(
-  "Missing Covariates/results/table5_missing_covariates_detailed_diagnostics.csv\n"
-)
-
-cat(
-  "\n============================================================\n"
-)
