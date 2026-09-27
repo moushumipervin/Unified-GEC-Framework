@@ -15,7 +15,7 @@ Some R scripts reproduce more than one manuscript table or figure. This is inten
 
 Generated tables and figures are not included in the repository because the final numerical results are reported in the manuscript and Supplementary Material. Running the corresponding scripts reproduces those results.
 ## Repository Structure
-
+```text
 Semi-supervised/
 ├── functions/
 │   ├── nhanes_functions.R
@@ -55,7 +55,7 @@ Missing Covariate/
 │
 └── simulation/
     └── table4_tableS4_missing_covariate_simulation.R
-
+...
 
 Manuscript Output Map
 Output	R script
