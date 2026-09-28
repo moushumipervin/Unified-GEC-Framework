@@ -1,5 +1,6 @@
 
-# Reproducibility Code
+# Reproducibility code for the manuscript
+“A Calibration Framework for Inference with Partially Observed Data.”
 
 This repository contains the R code used to reproduce the simulation studies and data applications reported in the main manuscript and Supplementary Material.
 
